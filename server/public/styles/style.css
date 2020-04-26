@@ -1,7 +1,61 @@
 body {
-    background: lightblue;
+    margin-top: 100px;
+    background: #41B3A3;
 }
 
-.blue {
-    background: blue;
+#main {
+    background-color: white;
+    width: 400px;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 15px 15px 15px rgb(63, 63, 63);
+}
+
+h1 {
+    background-color: #e27d60;
+    color: white;
+    width: 100%;
+}
+h3 {
+    margin: 10px;
+}
+
+#taskInput {
+    border: none;
+    border-bottom: 1px solid #e27d60; 
+    font-size: 20px;
+}
+
+input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+#priorityInput {
+    margin: 10px;
+}
+
+#addBtn {
+    display: block;
+    margin: 10px;
+    background-color: #E8A87C;
+}
+
+.trashCan {
+    width: 30px;
+    height: 30px;
+}
+
+.checkMark {
+    width: 30px;
+    height: 30px;
+}
+
+.complete {
+    text-decoration: line-through;
+    color: rgb(0, 0, 0, 0.3);
 }

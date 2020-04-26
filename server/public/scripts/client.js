@@ -51,13 +51,23 @@ function appendList(response) {
     let el = $('#list');
     el.empty();
     for (let i = 0; i < response.length; i++) {
-        el.append(`
+        if (response[i].status === 'complete') {
+            el.append(`
             <tr>
-            <td class="task" id="${response[i].id}"data-color="${response[i].color}">${response[i].task}</td>
-            <td><button id="completeBtn" data-id="${response[i].id}" data-status="${response[i].status}">Complete</button></td>
-            <td id="deleteBtn" data-id="${response[i].id}"><button>Delete</button></td>
+            <td class="task complete" id="${response[i].id}">${response[i].task}</td>
+            <td id="completeBtn" data-id="${response[i].id}" data-status="${response[i].status}"><input class="checkMark" type="image" src="../images/check-mark.jpg"></td>
+            <td id="deleteBtn" data-id="${response[i].id}"><input class="trashCan" type="image" src="../images/trash-can.jpg"></td>
             </tr>
             `);
+        } else {
+            el.append(`
+            <tr>
+            <td class="task" id="${response[i].id}">${response[i].task}</td>
+            <td id="completeBtn" data-id="${response[i].id}" data-status="${response[i].status}"><input class="checkMark" type="image" src="../images/check-mark.jpg"></td>
+            <td id="deleteBtn" data-id="${response[i].id}"><input class="trashCan" type="image" src="../images/trash-can.jpg"></td>
+            </tr>
+            `);
+        }
     }
 }
 
