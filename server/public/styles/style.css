@@ -42,7 +42,9 @@ input::placeholder {
 #addBtn {
     display: block;
     margin: 10px;
-    background-color: #E8A87C;
+    background-color: rgb(233, 157, 105);
+    color: white;
+    margin-bottom: 25px;
 }
 
 .trashCan {
@@ -58,4 +60,18 @@ input::placeholder {
 .complete {
     text-decoration: line-through;
     color: rgb(0, 0, 0, 0.3);
+}
+
+.high {
+    color: red;
+
+}
+
+.medium {
+    font-weight: bolder;
+    color: rgb(255, 166, 0);
+}
+
+.low {
+    color: #41B3A3;
 }

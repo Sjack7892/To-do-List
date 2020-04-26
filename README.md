@@ -4,6 +4,8 @@
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+This is a to-do list app that takes the users input and displays it in a list. Tasks on the list can be marked complete or deleted as needed. 
+
+
 
 Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).

@@ -51,23 +51,13 @@ function appendList(response) {
     let el = $('#list');
     el.empty();
     for (let i = 0; i < response.length; i++) {
-        if (response[i].status === 'complete') {
             el.append(`
             <tr>
-            <td class="task complete" id="${response[i].id}">${response[i].task}</td>
+            <td class="task ${response[i].status} ${response[i].priority}" id="${response[i].id}">${response[i].task}</td>
             <td id="completeBtn" data-id="${response[i].id}" data-status="${response[i].status}"><input class="checkMark" type="image" src="../images/check-mark.jpg"></td>
             <td id="deleteBtn" data-id="${response[i].id}"><input class="trashCan" type="image" src="../images/trash-can.jpg"></td>
             </tr>
             `);
-        } else {
-            el.append(`
-            <tr>
-            <td class="task" id="${response[i].id}">${response[i].task}</td>
-            <td id="completeBtn" data-id="${response[i].id}" data-status="${response[i].status}"><input class="checkMark" type="image" src="../images/check-mark.jpg"></td>
-            <td id="deleteBtn" data-id="${response[i].id}"><input class="trashCan" type="image" src="../images/trash-can.jpg"></td>
-            </tr>
-            `);
-        }
     }
 }
 
