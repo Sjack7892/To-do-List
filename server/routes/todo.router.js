@@ -4,19 +4,6 @@ const todoRouter = express.Router();
 // DB CONNECTION
 const pool = require('../modules/pool');
 
-let stuff = ['fish', 'taco', 'beans', 'baseball'];
-
-// koalaRouter.get('/', (req, res) => {
-//     let queryText = 'SELECT * FROM "koalas" ORDER BY "id" DESC;';
-//     pool.query(queryText).then(result => {
-//         res.send(result.rows);
-//     })
-//         .catch(error => {
-//             console.log('error getting koalas', error);
-//             res.sendStatus(500);
-//         });
-// });
-
 // GET
 todoRouter.get('/', (req, res) => {
     let queryText = 'SELECT * FROM "todo" ORDER BY "id";';
@@ -30,23 +17,11 @@ todoRouter.get('/', (req, res) => {
         })
 });
 
-// koalaRouter.post('/', (req, res) => {
-//     let queryText = `INSERT INTO "koalas" ("name", "age", "gender", "ready_to_transfer", "notes")
-//     VALUES ($1, $2, $3, $4, $5);`
-//     pool.query(queryText, [req.body.name, req.body.age, req.body.gender, req.body.readyForTransfer, req.body.notes])
-//     .then((result) => {
-//         res.sendStatus(201)
-//     }).catch((error) => {
-//         console.log(error);
-//         res.sendStatus(500);
-//     })
-// })
-
 // POST
 todoRouter.post('/', (req, res) => {
-    let queryText = `INSERT INTO "todo" ("task", "priority", "color") VALUES ($1, $2, $3);`;
+    let queryText = `INSERT INTO "todo" ("task", "priority") VALUES ($1, $2);`;
     console.log(req.body);
-    pool.query(queryText, [req.body.task, req.body.priority, req.body.color])
+    pool.query(queryText, [req.body.task, req.body.priority])
     .then((result) => {
         res.sendStatus(201);
     }).catch((error) => {
@@ -58,6 +33,14 @@ todoRouter.post('/', (req, res) => {
 // PUT
 
 // DELETE
-
+todoRouter.delete('/:id', (req, res) => {
+    let queryString = `DELETE FROM "todo" WHERE id = $1;`;
+    pool.query(queryString, [req.params.id])
+    .then((result) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        res.sendStatus(500);
+    })
+});
 
 module.exports = todoRouter;

@@ -5,33 +5,31 @@ $(document).ready(readyNow);
 function readyNow() {
     console.log('jquery ready');
     getList();
-    assignTaskColor();
     $('#addBtn').on('click', addTask);
+    $('#list').on('click', '#deleteBtn', deleteTask);
 }
 
 function addTask() {
     // Object to send to database.
     let task = {
         task: $('#taskInput').val(),
-        priority: $('#priorityInput').val(),
-        color: $('#colorInput').val()
+        priority: $('#priorityInput').val()
     }
     // Resets input values.
     $('#taskInput').val('');
     $('#priorityInput').val('low');
-    $('#colorInput').val('');
-    
+    // 
     $.ajax({
         type: 'POST',
         url: '/todo',
         data: task
-    }).then(function(response) {
+    }).then(function (response) {
         console.log('back from /todo POST', response);
         getList()
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log('error in /todo POST');
     })
-    
+
 }
 
 function getList() {
@@ -39,10 +37,10 @@ function getList() {
     $.ajax({
         type: 'GET',
         url: '/todo',
-    }).then(function(response) {
+    }).then(function (response) {
         console.log('in /todo GET:', response);
         appendList(response);
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log('error in /todo GET:', error);
     });
 }
@@ -52,20 +50,28 @@ function appendList(response) {
     let el = $('#list');
     el.empty();
     for (let i = 0; i < response.length; i++) {
-        if(response[i].color == 'blue') {
-            el.append(`
-            <li class="task blue"  id="${response[i].id}"data-color="${response[i].color}">${response[i].task}</li>
+        el.append(`
+            <tr>
+            <td class="task" id="${response[i].id}"data-color="${response[i].color}">${response[i].task}</td>
+            <td><button>Complete</button></td>
+            <td id="deleteBtn" data-id="${response[i].id}"><button>Delete</button></td>
+            </tr>
             `);
-        } else {
-            el.append(`
-            <li class="task" id="${response[i].id}"data-color="${response[i].color}">${response[i].task}</li>
-            `);
-        }
-       
     }
 }
 
-function assignTaskColor() {
-    console.log($('.task').data('color'));
-   
+function deleteTask() {
+    let id = $(this).data('id');
+    console.log('task deleted', id);
+    $.ajax({
+        type: 'DELETE',
+        url: `/todo/${id}`,
+    }).then(function(response) {
+        console.log('in /todo DELETE', response);
+        getList();
+    }).catch(function(error) {
+        console.log('error in /todo DELETE', error);
+    })
 }
+
+
