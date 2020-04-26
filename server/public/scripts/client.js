@@ -2,6 +2,7 @@ console.log('js ready');
 
 $(document).ready(readyNow);
 
+// Fires when document loads.
 function readyNow() {
     console.log('jquery ready');
     getList();
@@ -9,7 +10,7 @@ function readyNow() {
     $('#list').on('click', '#deleteBtn', deleteTask);
     $('#list').on('click', '#completeBtn', completeTask);
 }
-
+// Sends new task input to database.
 function addTask() {
     // Object to send to database.
     let task = {
@@ -19,7 +20,6 @@ function addTask() {
     // Resets input values.
     $('#taskInput').val('');
     $('#priorityInput').val('low');
-    // 
     $.ajax({
         type: 'POST',
         url: '/todo',
@@ -32,7 +32,7 @@ function addTask() {
     })
 
 }
-
+// Collects info from database to append to DOM.
 function getList() {
     console.log('in getTodoList');
     $.ajax({
@@ -45,11 +45,13 @@ function getList() {
         console.log('error in /todo GET:', error);
     });
 }
-
+// Appends info from GET request to the DOM.
 function appendList(response) {
     console.log(response);
+    // Empties element for new append data.
     let el = $('#list');
     el.empty();
+    // Loops through array to append for each separate task.
     for (let i = 0; i < response.length; i++) {
             el.append(`
             <tr>
@@ -60,7 +62,7 @@ function appendList(response) {
             `);
     }
 }
-
+// Updates task status in database.
 function completeTask() {
     let id = $(this).data('id');
     let status = $(this).data('status');
@@ -77,7 +79,7 @@ function completeTask() {
         console.log(error);
     })
 }
-
+// Deletes task from database.
 function deleteTask() {
     let id = $(this).data('id');
     console.log('task deleted', id);

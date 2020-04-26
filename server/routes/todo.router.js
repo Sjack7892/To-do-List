@@ -1,12 +1,12 @@
 const express = require('express');
 const todoRouter = express.Router();
 
-// DB CONNECTION
+// Database connection.
 const pool = require('../modules/pool');
 
-// GET
+// Get.
 todoRouter.get('/', (req, res) => {
-    let queryText = `SELECT * FROM "todo" ORDER BY CASE "priority" WHEN 'low' THEN 1 WHEN 'medium' THEN 2 WHEN 'high' THEN 3 END, "id" DESC;`;
+    let queryText = `SELECT * FROM "todo" ORDER BY CASE "priority" WHEN 'low' THEN 3 WHEN 'medium' THEN 2 WHEN 'high' THEN 1 END, "id";`;
     pool.query(queryText).then(result => {
         console.log(result.rows);
         res.send(result.rows);
@@ -17,7 +17,7 @@ todoRouter.get('/', (req, res) => {
         })
 });
 
-// POST
+// Post.
 todoRouter.post('/', (req, res) => {
     let queryText = `INSERT INTO "todo" ("task", "priority") VALUES ($1, $2);`;
     console.log(req.body);
@@ -30,7 +30,7 @@ todoRouter.post('/', (req, res) => {
         })
 });
 
-// PUT
+// Put.
 todoRouter.put('/:id', (req, res) => {
     let task = req.body;
     let id = req.params.id;
@@ -52,7 +52,7 @@ todoRouter.put('/:id', (req, res) => {
 })
 
 
-// DELETE
+// Delete.
 todoRouter.delete('/:id', (req, res) => {
     let queryString = `DELETE FROM "todo" WHERE id = $1;`;
     pool.query(queryString, [req.params.id])

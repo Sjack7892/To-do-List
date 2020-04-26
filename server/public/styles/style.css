@@ -21,6 +21,7 @@ h1 {
     color: white;
     width: 100%;
 }
+
 h3 {
     margin: 10px;
 }
@@ -42,8 +43,6 @@ input::placeholder {
 #addBtn {
     display: block;
     margin: 10px;
-    background-color: rgb(233, 157, 105);
-    color: white;
     margin-bottom: 25px;
 }
 
@@ -57,21 +56,23 @@ input::placeholder {
     height: 30px;
 }
 
-.complete {
-    text-decoration: line-through;
-    color: rgb(0, 0, 0, 0.3);
-}
-
 .high {
-    color: red;
+    color: white;
+    background: rgb(213, 31, 31);
 
 }
 
 .medium {
-    font-weight: bolder;
-    color: rgb(255, 166, 0);
+    color: white;
+    background: rgb(240, 156, 0);
 }
 
 .low {
-    color: #41B3A3;
+    background: rgb(242, 242, 53);
+}
+
+.complete {
+    text-decoration: line-through;
+    color: rgb(0, 0, 0, 0.3);
+    background-color: rgb(215, 215, 215);
 }
