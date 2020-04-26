@@ -7,6 +7,7 @@ function readyNow() {
     getList();
     $('#addBtn').on('click', addTask);
     $('#list').on('click', '#deleteBtn', deleteTask);
+    $('#list').on('click', '#completeBtn', completeTask);
 }
 
 function addTask() {
@@ -53,11 +54,28 @@ function appendList(response) {
         el.append(`
             <tr>
             <td class="task" id="${response[i].id}"data-color="${response[i].color}">${response[i].task}</td>
-            <td><button>Complete</button></td>
+            <td><button id="completeBtn" data-id="${response[i].id}" data-status="${response[i].status}">Complete</button></td>
             <td id="deleteBtn" data-id="${response[i].id}"><button>Delete</button></td>
             </tr>
             `);
     }
+}
+
+function completeTask() {
+    let id = $(this).data('id');
+    let status = $(this).data('status');
+    console.log('task completed', id, status);
+    $.ajax({
+        type: 'PUT',
+        url: `/todo/${id}`,
+        data: {
+            status: status
+        }
+    }).then(function(response) {
+        getList();
+    }).catch(function(error) {
+        console.log(error);
+    })
 }
 
 function deleteTask() {
