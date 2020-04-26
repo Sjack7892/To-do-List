@@ -11,21 +11,21 @@
 <body>
     <h1>To-Do List</h1>
     <h3>Task<h3>
-    <input type="text" placeholder="Describe your task">
+    <input id="taskInput" type="text" placeholder="Describe your task">
     <h3>Priority</h3>
-    <select>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
+    <select id="priorityInput">
         <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
     </select>
     <h3>Color</h3>
-    <select>
+    <select id="colorInput">
         <option>Blue</option>
         <option>Green</option>
         <option>Yellow</option>
         <option>Red</option>
     </select>
-    <button>ADD</button>
+    <button id="addBtn">ADD</button>
     <ul id="list">
         <li>go grocery shopping</li>
         <li>clean out garage</li>

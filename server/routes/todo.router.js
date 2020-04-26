@@ -30,7 +30,30 @@ todoRouter.get('/', (req, res) => {
         })
 });
 
+// koalaRouter.post('/', (req, res) => {
+//     let queryText = `INSERT INTO "koalas" ("name", "age", "gender", "ready_to_transfer", "notes")
+//     VALUES ($1, $2, $3, $4, $5);`
+//     pool.query(queryText, [req.body.name, req.body.age, req.body.gender, req.body.readyForTransfer, req.body.notes])
+//     .then((result) => {
+//         res.sendStatus(201)
+//     }).catch((error) => {
+//         console.log(error);
+//         res.sendStatus(500);
+//     })
+// })
+
 // POST
+todoRouter.post('/', (req, res) => {
+    let queryText = `INSERT INTO "todo" ("task", "priority", "color") VALUES ($1, $2, $3);`;
+    console.log(req.body);
+    pool.query(queryText, [req.body.task, req.body.priority, req.body.color])
+    .then((result) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+});
 
 // PUT
 
